@@ -40,8 +40,18 @@ const additionalServiceSchema = new Schema({
     required: false,
   },
   serviceGroup: {
-    type: String,
-    required: false,
+    UK: {
+      type: String,
+      required: false,
+    },
+    RU: {
+      type: String,
+      required: false,
+    },
+    EN: {
+      type: String,
+      required: false,
+    },
   },
   serviceGroupId: {
     type: String,

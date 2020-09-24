@@ -121,7 +121,7 @@ async function getListAdditionalServices(req, res, next) {
           description: addServiceItem.description[language],
           sender: addServiceItem.sender,
           recipient: addServiceItem.recipient,
-          serviceGroup: addServiceItem.serviceGroup,
+          serviceGroup: addServiceItem.serviceGroup[language],
           serviceGroupId: addServiceItem.serviceGroupId,
           fixedCount: addServiceItem.fixedCount,
           staticName: addServiceItem.staticName,
