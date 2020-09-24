@@ -55,10 +55,10 @@ router.delete("/:id", checkApiKey, getDepartureCondition, async (req, res) => {
 });
 
 async function getDepartureCondition(req, res, next) {
-  let delCondition;
+  let depCondition;
   try {
-    delCondition = await departureCondition.find({ ref: req.params.id });
-    if (delCondition == null) {
+    depCondition = await departureCondition.find({ ref: req.params.id });
+    if (depCondition == null) {
       return res
         .status(404)
         .json({ message: "Cannot find Departure Condition" });
