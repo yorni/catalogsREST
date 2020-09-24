@@ -81,7 +81,7 @@ async function getListTowns(req, res, next) {
   try {
     let language = req.query.language;
     let limit = req.query.limit;
-    let searchstring = req.query.searchstring.toLowerCase();
+    let searchstring = req.query.searchstring;
     let place_id = req.query.place_id;
     //let searchid = req.query.cityRef; регл задание? которое возвращает какой-то файл - непонятно
     let offset = req.query.offset;
