@@ -29,10 +29,12 @@ const rspSchema = new Schema({
       required: false,
     },
   },
-  typeCOD: {
-    type: String,
-    required: false,
-  },
+  typeCOD: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
 
   searchstring: {
     type: String,
