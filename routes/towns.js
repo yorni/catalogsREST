@@ -70,7 +70,7 @@ async function getTown(req, res, next) {
   try {
     town = await Town.find({ ref: req.params.id });
     if (town == null) {
-      return res.status(404).json({ message: "Cannot find town" });
+      return res.status(404).json({ message: "Cannot find town by ref" });
     }
   } catch (err) {
     return res.status(500).json({ message: err.message });
