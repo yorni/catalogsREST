@@ -123,7 +123,9 @@ async function getListTowns(req, res, next) {
         .sort({ townSize: "desc" })
         .limit(+limit);
     } else {
-      allTowns = await Town.find(conditions).sort({ townSize: "desc" });
+      allTowns = await Town.find(conditions)
+        .sort({ townSize: "desc" })
+        .limit(101);
     }
     const allTownsWithLang = allTowns.map((townItem) => {
       return {
