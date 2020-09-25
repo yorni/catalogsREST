@@ -92,9 +92,9 @@ async function getListRSP(req, res, next) {
     let website = true && app && app == "website";
     let language = req.query.language;
     let limit = req.query.limit;
-    let searchstring = req.query.searchString;
+    let searchstring = req.query.searchstring;
     let place_id = req.query.place_id;
-    let cityRef = req.query.cityRef;
+    let cityRef = req.query.cityref;
     let offset = req.query.offset;
     let ref = req.query.ref;
 

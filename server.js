@@ -13,6 +13,13 @@ const app = express();
 const port = process.env.PORT;
 app.use(bodyParser.json({ extended: true }));
 
+app.use(function (req, res, next) {
+  for (var key in req.query) {
+    req.query[key.toLowerCase()] = req.query[key];
+  }
+  next();
+});
+
 const rspRouter = require("./routes/rsp");
 app.use("/getRsp", rspRouter);
 
