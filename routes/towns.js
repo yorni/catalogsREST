@@ -27,6 +27,7 @@ router.post("/", checkApiKey, async (req, res) => {
     town.rspRef = req.body.rspRef;
     town.containsRsp = req.body.containsRsp;
     town.rspList = req.body.rspList;
+    town.townSize = req.body.townSize;
   } else {
     town = new Town({
       description: req.body.description,
@@ -39,6 +40,7 @@ router.post("/", checkApiKey, async (req, res) => {
       rspRef: req.body.rspRef,
       containsRsp: req.body.containsRsp,
       rspList: req.body.rspList,
+      townSize: req.body.townSize,
     });
   }
 
@@ -117,9 +119,11 @@ async function getListTowns(req, res, next) {
 
     let allTowns = [];
     if (limit) {
-      allTowns = await Town.find(conditions).limit(+limit);
+      allTowns = await Town.find(conditions)
+        .sort({ townSize: "desc" })
+        .limit(+limit);
     } else {
-      allTowns = await Town.find(conditions);
+      allTowns = await Town.find(conditions).sort({ townSize: "desc" });
     }
     const allTownsWithLang = allTowns.map((townItem) => {
       return {

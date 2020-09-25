@@ -64,6 +64,10 @@ const townSchema = new Schema({
     type: String,
     required: false,
   },
+  townSize: {
+    type: Number,
+    required: false,
+  },
 
   ref: {
     type: String,
