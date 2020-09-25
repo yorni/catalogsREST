@@ -28,6 +28,7 @@ router.post("/", checkApiKey, async (req, res) => {
     rsp.cityRef = req.body.cityRef;
     rsp.schedule = req.body.schedule;
     rsp.place_id = req.body.place_id;
+    rsp.typeCOD = req.body.typeCOD;
     rsp.searchstring = req.body.searchstring.toLowerCase();
   } else {
     rsp = new RSP({
@@ -42,6 +43,7 @@ router.post("/", checkApiKey, async (req, res) => {
       cityRef: req.body.cityRef,
       schedule: req.body.schedule,
       place_id: req.body.place_id,
+      typeCOD: req.body.typeCOD,
       searchstring: req.body.searchstring.toLowerCase(),
     });
   }
@@ -86,6 +88,8 @@ async function getRSP(req, res, next) {
 
 async function getListRSP(req, res, next) {
   try {
+    let app = req.query.app;
+    let website = true && app && app == "website";
     let language = req.query.language;
     let limit = req.query.limit;
     let searchstring = req.query.searchstring;
@@ -121,18 +125,36 @@ async function getListRSP(req, res, next) {
       allRSP = await RSP.find(conditions);
     }
     const allRSPWithLang = allRSP.map((rspItem) => {
-      return {
-        description: rspItem.description[language],
-        address: rspItem.address[language],
-        phone: rspItem.phone,
-        email: rspItem.email,
-        ref: rspItem.ref,
-        number: rspItem.number,
-        latitude: rspItem.latitude,
-        longitude: rspItem.longitude,
-        cityRef: rspItem.cityRef,
-        schedule: rspItem.schedule,
-      };
+      if (website) {
+        return {
+          description: rspItem.description[language],
+          address: rspItem.address[language],
+          phone: rspItem.phone,
+          email: rspItem.email,
+          ref: rspItem.ref,
+          number: rspItem.number,
+          latitude: rspItem.latitude,
+          longitude: rspItem.longitude,
+          cityRef: rspItem.cityRef,
+          typeCOD: rspItem.typeCOD,
+          schedule: rspItem.schedule,
+        };
+      } else {
+        {
+          return {
+            description: rspItem.description[language],
+            address: rspItem.address[language],
+            phone: rspItem.phone,
+            email: rspItem.email,
+            ref: rspItem.ref,
+            number: rspItem.number,
+            latitude: rspItem.latitude,
+            longitude: rspItem.longitude,
+            cityRef: rspItem.cityRef,
+            schedule: rspItem.schedule,
+          };
+        }
+      }
     });
     res.result = {
       success: true,
