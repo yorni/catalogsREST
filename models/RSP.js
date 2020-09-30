@@ -36,6 +36,21 @@ const rspSchema = new Schema({
     },
   ],
 
+  region: {
+    UK: {
+      type: String,
+      required: false,
+    },
+    RU: {
+      type: String,
+      required: false,
+    },
+    EN: {
+      type: String,
+      required: false,
+    },
+  },
+
   searchstring: {
     type: String,
     required: false,

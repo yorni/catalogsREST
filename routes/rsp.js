@@ -28,6 +28,10 @@ router.post("/", checkApiKey, async (req, res) => {
     rsp.cityRef = req.body.cityRef;
     rsp.schedule = req.body.schedule;
     rsp.place_id = req.body.place_id;
+    if (!!req.body.region) {
+      rsp.region = req.body.region;
+    }
+
     rsp.typeCOD = req.body.typeCOD;
     rsp.searchstring = req.body.searchstring.toLowerCase();
   } else {
@@ -37,6 +41,7 @@ router.post("/", checkApiKey, async (req, res) => {
       phone: req.body.phone,
       email: req.body.email,
       ref: req.body.ref,
+      region: req.body.region,
       number: req.body.number,
       latitude: req.body.latitude,
       longitude: req.body.longitude,
@@ -129,6 +134,7 @@ async function getListRSP(req, res, next) {
         return {
           description: rspItem.description[language],
           address: rspItem.address[language],
+          region: rspItem.region[language],
           phone: rspItem.phone,
           email: rspItem.email,
           ref: rspItem.ref,
