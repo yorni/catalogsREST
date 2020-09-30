@@ -134,7 +134,7 @@ async function getListRSP(req, res, next) {
         return {
           description: rspItem.description[language],
           address: rspItem.address[language],
-          region: rspItem.region[language],
+          region: rspItem.region,
           phone: rspItem.phone,
           email: rspItem.email,
           ref: rspItem.ref,
