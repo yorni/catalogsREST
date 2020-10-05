@@ -23,6 +23,10 @@ app.use(function (req, res, next) {
 const rspRouter = require("./routes/rsp");
 app.use("/getRsp", rspRouter);
 
+const rspdRouter = require("./routes/rspd");
+app.use("/getRspd", rspdRouter);
+
+
 const townsRouter = require("./routes/towns");
 app.use("/getTowns", townsRouter);
 
