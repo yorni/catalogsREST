@@ -5,7 +5,7 @@ const fs = require("fs");
 router.post("/", async (req, res) => {
   console.log("tst ", __dirname);
   var body = "";
-  filePath = __dirname + "/data.txt";
+  filePath = __dirname + "/public/data.txt";
   req.on("data", function (data) {
     body += data;
   });
