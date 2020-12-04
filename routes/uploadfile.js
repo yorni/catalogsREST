@@ -3,8 +3,9 @@ const router = express.Router();
 const fs = require("fs");
 
 router.post("/", async (req, res) => {
+  console.log("tst ", __dirname);
   var body = "";
-  filePath = __dirname + "/public/data.txt";
+  filePath = __dirname + "/data.txt";
   req.on("data", function (data) {
     body += data;
   });
