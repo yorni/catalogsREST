@@ -26,7 +26,6 @@ app.use("/getRsp", rspRouter);
 const rspdRouter = require("./routes/rspd");
 app.use("/getRspd", rspdRouter);
 
-
 const townsRouter = require("./routes/towns");
 app.use("/getTowns", townsRouter);
 
@@ -38,6 +37,12 @@ app.use("/getDeliveryConditions", deliveryConditionsRouter);
 
 const departureConditionsRouter = require("./routes/departureconditions");
 app.use("/getDepartureConditions", departureConditionsRouter);
+
+const uploadfile = require("./routes/uploadfile");
+app.use("/integration/hs/diia/fileupload", uploadfile);
+
+app.use("/public", express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public"));
 
 app.listen(port, () => {
   console.log("We are live on " + port);
