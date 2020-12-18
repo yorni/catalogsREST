@@ -46,7 +46,8 @@ async function getWorkingDay(req, res, next) {
     if (rsd_id) {
       workingday = await WorkingDay.find({ rspRef: rspRef });
     } else {
-      if (city_id) {
+      if (cityRef) {
+        //console.log(cityRef);
         workingday = await WorkingDay.find({ cityRefs: cityRef });
       }
     }
