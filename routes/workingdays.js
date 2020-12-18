@@ -72,14 +72,14 @@ async function getAllWorkingDays(req, res, next) {
       allWorkingDays = await WorkingDay.find({ rspRef: rspRef });
     } else {
       if (cityRef) {
-        console.log(cityRef);
+        //console.log(cityRef);
         allWorkingDays = await WorkingDay.find({ cityRefs: cityRef });
       }
     }
     if (allWorkingDays == null) {
       return res.status(404).json({ message: "Cannot find RSP" });
     }
-    res.result = allWorkingDays;
+    res.result = allWorkingDays[0].workingDays;
     next();
   } catch (err) {
     return res.status(500).json({ message: err.message });
