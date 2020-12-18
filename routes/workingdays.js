@@ -39,15 +39,15 @@ module.exports = router;
 
 async function getWorkingDay(req, res, next) {
   let workingday;
-  let rspRef = req.params.rspRef;
-  let cityRef = req.params.cityRef;
+  let rspRef = req.query.rspRef;
+  let cityRef = req.query.cityRef;
 
   try {
-    if (rsd_id) {
+    if (rspRef) {
       workingday = await WorkingDay.find({ rspRef: rspRef });
     } else {
       if (cityRef) {
-        //console.log(cityRef);
+        console.log(cityRef);
         workingday = await WorkingDay.find({ cityRefs: cityRef });
       }
     }
@@ -63,10 +63,22 @@ async function getWorkingDay(req, res, next) {
 }
 
 async function getAllWorkingDays(req, res, next) {
+  let rspRef = req.query.rspRef;
+  let cityRef = req.query.cityRef;
   try {
     let allRSP = [];
-    allWorkingDays = await WorkingDay.find();
 
+    if (rspRef) {
+      allWorkingDays = await WorkingDay.find({ rspRef: rspRef });
+    } else {
+      if (cityRef) {
+        console.log(cityRef);
+        allWorkingDays = await WorkingDay.find({ cityRefs: cityRef });
+      }
+    }
+    if (allWorkingDays == null) {
+      return res.status(404).json({ message: "Cannot find RSP" });
+    }
     res.result = allWorkingDays;
     next();
   } catch (err) {
