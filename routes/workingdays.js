@@ -76,9 +76,22 @@ async function getAllWorkingDays(req, res, next) {
           allWorkingDays = await WorkingDay.find({ cityRefs: cityRef });
         }
       }
+      console.log(allWorkingDays);
+
       if (allWorkingDays == null) {
         return res.status(404).json({ message: "Cannot find RSP" });
       }
+
+      array = allWorkingDays[0].workingDays;
+      let index = array.indexOf("2020-12-30");
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+      index = array.indexOf("2020-12-31");
+      if (index > -1) {
+        array.splice(index, 1);
+      }
+
       res.result = allWorkingDays[0].workingDays;
     } else {
       return res.status(404).json({ message: "Cannot find city or RSP" });
