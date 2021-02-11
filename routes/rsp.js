@@ -98,6 +98,7 @@ async function getListRSP(req, res, next) {
     let language = req.query.language;
     let limit = req.query.limit;
     let searchstring = req.query.searchstring;
+    let number = req.query.number;
     let place_id = req.query.place_id;
     let cityRef = req.query.cityref;
     let offset = req.query.offset;
@@ -112,6 +113,10 @@ async function getListRSP(req, res, next) {
 
     if (ref) {
       conditions.ref = ref;
+    }
+
+    if (number) {
+      conditions.number = number;
     }
 
     if (cityRef) {
