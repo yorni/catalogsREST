@@ -17,6 +17,8 @@ app.use(function (req, res, next) {
   for (var key in req.query) {
     req.query[key.toLowerCase()] = req.query[key];
   }
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "origin, content-type, accept");
   next();
 });
 
@@ -44,11 +46,8 @@ app.use("/integration/hs/diia/fileupload", uploadfile);
 app.use("/public", express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/public"));
 
-
 const workingDays = require("./routes/workingdays");
 app.use("/workingdays", workingDays);
-
-
 
 app.listen(port, () => {
   console.log("We are live on " + port);
