@@ -64,6 +64,28 @@ const townSchema = new Schema({
     type: String,
     required: false,
   },
+
+  mainRsp: {
+    ref: {
+      type: String,
+      required: false,
+    },
+    description: {
+      UK: {
+        type: String,
+        required: false,
+      },
+      RU: {
+        type: String,
+        required: false,
+      },
+      EN: {
+        type: String,
+        required: false,
+      },
+    },
+  },
+
   townSize: {
     type: Number,
     required: false,
@@ -90,8 +112,24 @@ const townSchema = new Schema({
 
   rspList: [
     {
-      type: String,
-      required: false,
+      ref: {
+        type: String,
+        required: false,
+      },
+      description: {
+        UK: {
+          type: String,
+          required: false,
+        },
+        RU: {
+          type: String,
+          required: false,
+        },
+        EN: {
+          type: String,
+          required: false,
+        },
+      },
     },
   ],
 });

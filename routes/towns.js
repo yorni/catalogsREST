@@ -27,6 +27,7 @@ router.post("/", checkApiKey, async (req, res) => {
     town.rspRef = req.body.rspRef;
     town.containsRsp = req.body.containsRsp;
     town.rspList = req.body.rspList;
+    town.mainRsp = req.body.mainRsp;
     town.townSize = req.body.townSize;
   } else {
     town = new Town({
@@ -40,6 +41,7 @@ router.post("/", checkApiKey, async (req, res) => {
       rspRef: req.body.rspRef,
       containsRsp: req.body.containsRsp,
       rspList: req.body.rspList,
+      mainRsp: req.body.mainRsp,
       townSize: req.body.townSize,
     });
   }
@@ -135,7 +137,17 @@ async function getListTowns(req, res, next) {
         district: townItem.district[language],
         region: townItem.region[language],
         oldDescription: townItem.description[language],
-        rspList: townItem.rspList,
+        mainRsp: {
+          ref: townItem.mainRsp.ref,
+          description: townItem.mainRsp.description[language],
+        },
+
+        rspList: townItem.rspList.map((rspListItem) => {
+          return {
+            ref: rspListItem.ref,
+            description: rspListItem.description[language],
+          };
+        }),
       };
     });
     res.result = {
