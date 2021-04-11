@@ -70,6 +70,7 @@ async function getListCargoDescriptions(req, res, next) {
     let limit = req.query.limit;
     let ref = req.query.ref;
     let searchstring = req.query.searchstring;
+    let offset = req.query.offset;
 
     language = prepareLanguage(language);
 
@@ -83,13 +84,23 @@ async function getListCargoDescriptions(req, res, next) {
       conditions.searchstring = { $regex: searchstring.toLowerCase() };
     }
 
+    if (offset) {
+      let skipCount = +offset;
+    } else {
+      let skipCount = 0;
+    }
+
     let allCargoDescriptions = [];
     if (limit) {
       allCargoDescriptions = await cargoDescription
         .find(conditions)
+        .sort("description.RU")
+        .skip(skipCount)
         .limit(+limit);
     } else {
-      allCargoDescriptions = await cargoDescription.find(conditions);
+      allCargoDescriptions = await cargoDescription
+        .find(conditions)
+        .sort("description.RU");
     }
     const allCargoDescriptionsLang = allCargoDescriptions.map(
       (addServiceItem) => {
