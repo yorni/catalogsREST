@@ -49,11 +49,11 @@ app.use(express.static(__dirname + "/public"));
 const workingDays = require("./routes/workingdays");
 app.use("/workingdays", workingDays);
 
-
 const cargoDescriptions = require("./routes/cargodescriptions");
 app.use("/getCargoDescriptionList", cargoDescriptions);
 
-
+const cargoTypes = require("./routes/cargotypes");
+app.use("/getCargoTypes", cargoTypes);
 
 app.listen(port, () => {
   console.log("We are live on " + port);
