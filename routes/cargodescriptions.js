@@ -87,7 +87,6 @@ async function getListCargoDescriptions(req, res, next) {
     let skipCount = 0;
     if (offset) {
       skipCount = +offset;
-      console.log(skipCount);
     }
 
     let allCargoDescriptions = [];
