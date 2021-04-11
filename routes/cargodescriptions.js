@@ -84,10 +84,10 @@ async function getListCargoDescriptions(req, res, next) {
       conditions.searchstring = { $regex: searchstring.toLowerCase() };
     }
 
+    let skipCount = 0;
     if (offset) {
-      let skipCount = +offset;
-    } else {
-      skipCount = 0;
+      skipCount = +offset;
+      console.log(skipCount);
     }
 
     let allCargoDescriptions = [];
