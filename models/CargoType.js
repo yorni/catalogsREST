@@ -121,7 +121,7 @@ const cargoTypeSchema = new Schema(
       },
     },
   },
-  { minimize: false }
+  { minimize: true }
 );
 const cargoType = mongoose.model("cargoType", cargoTypeSchema);
 module.exports = cargoType;
