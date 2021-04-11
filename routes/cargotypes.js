@@ -144,7 +144,9 @@ function isEmptyObject(obj) {
   // Otherwise, does it have any properties of its own?
   // Note that this doesn't handle
   // toString and valueOf enumeration bugs in IE < 9
+  console.log(obj);
   for (var key in obj) {
+    console.log(key);
     if (hasOwnProperty.call(obj, key)) return false;
   }
 
