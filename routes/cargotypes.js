@@ -86,6 +86,9 @@ async function getListCargoTypes(req, res, next) {
 
     const allCargoTypesLang = allCargoTypes.map((addServiceItem) => {
       let limits = {};
+
+      console.log(addServiceItem.limits.height.min);
+
       if (!isEmptyObject(addServiceItem.limits.height)) {
         limits.height = addServiceItem.limits.height;
       }
