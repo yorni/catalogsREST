@@ -87,29 +87,28 @@ async function getListCargoTypes(req, res, next) {
     const allCargoTypesLang = allCargoTypes.map((addServiceItem) => {
       let limits = {};
 
-      console.log(addServiceItem.limits.height.min);
-
-      if (!isEmptyObject(addServiceItem.limits.height)) {
+      if (addServiceItem.limits.height.max) {
         limits.height = addServiceItem.limits.height;
       }
-      if (!isEmptyObject(addServiceItem.limits.width)) {
+
+      if (addServiceItem.limits.width.max) {
         limits.width = addServiceItem.limits.width;
       }
-      if (!isEmptyObject(addServiceItem.limits.length)) {
+      if (addServiceItem.limits.length.max) {
         limits.length = addServiceItem.limits.length;
       }
-      if (!isEmptyObject(addServiceItem.limits.weight)) {
+      if (addServiceItem.limits.weight.max) {
         limits.weight = addServiceItem.limits.weight;
       }
-      if (!isEmptyObject(addServiceItem.limits.size)) {
+      if (addServiceItem.limits.size.max) {
         limits.size = addServiceItem.limits.size;
       }
 
-      if (!isEmptyObject(addServiceItem.limits.volumeWeight)) {
+      if (addServiceItem.limits.volumeWeight.max) {
         limits.volumeWeight = addServiceItem.limits.volumeWeight;
       }
 
-      if (!isEmptyObject(addServiceItem.limits.volume)) {
+      if (addServiceItem.limits.volume.max) {
         limits.volume = addServiceItem.limits.volume;
       }
 
@@ -129,31 +128,6 @@ async function getListCargoTypes(req, res, next) {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
-}
-function isEmptyObject(obj) {
-  // null and undefined are "empty"
-  if (obj == null) return true;
-
-  // Assume if it has a length property with a non-zero value
-  // that that property is correct.
-  if (obj.length > 0) return false;
-  if (obj.length === 0) return true;
-
-  // If it isn't an object at this point
-  // it is empty, but it can't be anything *but* empty
-  // Is it empty?  Depends on your application.
-  if (typeof obj !== "object") return true;
-
-  // Otherwise, does it have any properties of its own?
-  // Note that this doesn't handle
-  // toString and valueOf enumeration bugs in IE < 9
-  console.log(obj);
-  for (var key in obj) {
-    console.log(key);
-    if (hasOwnProperty.call(obj, key)) return false;
-  }
-
-  return true;
 }
 
 module.exports = router;
