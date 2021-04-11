@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const cargoDescription = require("../models/СargoDescription");
+const cargoDescription = require("../models/CargoDescription");
 const prepareLanguage = require("../helpers/language");
 const checkApiKey = require("../helpers/auth");
 
