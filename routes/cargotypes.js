@@ -22,7 +22,6 @@ router.post("/", checkApiKey, async (req, res) => {
     cType.type = req.body.type;
     cType.typeref = req.body.typeref;
     cType.limits = req.body.limits;
-    
   } else {
     cType = new cargoType({
       description: req.body.description,
@@ -73,7 +72,7 @@ async function getListCargoTypes(req, res, next) {
   try {
     let language = req.query.language;
     let ref = req.query.ref;
-   
+
     language = prepareLanguage(language);
 
     let conditions = {};
@@ -82,26 +81,43 @@ async function getListCargoTypes(req, res, next) {
       conditions.ref = ref;
     }
 
- 
-
- 
-
     let allCargoTypes = [];
-      allCargoTypes = await cargoType
-        .find(conditions)
-        .sort("description.RU");
-   
-    const allCargoTypesLang = allCargoTypes.map(
-      (addServiceItem) => {
-        return {
-          ref: addServiceItem.ref,
-          description: addServiceItem.description[language],
-          type: addServiceItem.type[language],
-          typeref: addServiceItem.typeref,
-          limits: addServiceItem.limits,
-        };
+    allCargoTypes = await cargoType.find(conditions).sort("description.RU");
+
+    const allCargoTypesLang = allCargoTypes.map((addServiceItem) => {
+      let limits = {};
+      if (!isEmptyObject(addServiceItem.limits.height)) {
+        limits.height = addServiceItem.limits.height;
       }
-    );
+      if (!isEmptyObject(addServiceItem.limits.width)) {
+        limits.width = addServiceItem.limits.width;
+      }
+      if (!isEmptyObject(addServiceItem.limits.length)) {
+        limits.length = addServiceItem.limits.length;
+      }
+      if (!isEmptyObject(addServiceItem.limits.weight)) {
+        limits.weight = addServiceItem.limits.weight;
+      }
+      if (!isEmptyObject(addServiceItem.limits.size)) {
+        limits.size = addServiceItem.limits.size;
+      }
+
+      if (!isEmptyObject(addServiceItem.limits.volumeWeight)) {
+        limits.volumeWeight = addServiceItem.limits.volumeWeight;
+      }
+
+      if (!isEmptyObject(addServiceItem.limits.volume)) {
+        limits.volume = addServiceItem.limits.volume;
+      }
+
+      return {
+        ref: addServiceItem.ref,
+        description: addServiceItem.description[language],
+        type: addServiceItem.type[language],
+        typeref: addServiceItem.typeref,
+        limits: addServiceItem.limits,
+      };
+    });
     res.result = {
       success: true,
       data: allCargoTypesLang,
@@ -110,6 +126,10 @@ async function getListCargoTypes(req, res, next) {
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
+}
+
+function isEmptyObject(obj) {
+  return !Object.keys(obj).length;
 }
 
 module.exports = router;
