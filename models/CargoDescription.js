@@ -20,6 +20,11 @@ const cargoDescriptionSchema = new Schema({
     type: String,
     required: false,
   },
+
+  searchstring: {
+    type: String,
+    required: false,
+  },
 });
 const cargoDescription = mongoose.model(
   "cargoDescription",

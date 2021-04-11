@@ -19,10 +19,12 @@ router.post("/", checkApiKey, async (req, res) => {
   if (cDescription) {
     cDescription.description = req.body.description;
     cDescription.ref = req.body.ref;
+    cDescription.searchstring = req.body.searchstring.toLowerCase();
   } else {
     cDescription = new cargoDescription({
       description: req.body.description,
       ref: req.body.ref,
+      searchstring: req.body.searchstring.toLowerCase(),
     });
   }
 
@@ -67,6 +69,7 @@ async function getListCargoDescriptions(req, res, next) {
     let language = req.query.language;
     let limit = req.query.limit;
     let ref = req.query.ref;
+    let searchstring = req.query.searchstring;
 
     language = prepareLanguage(language);
 
@@ -74,6 +77,10 @@ async function getListCargoDescriptions(req, res, next) {
 
     if (ref) {
       conditions.ref = ref;
+    }
+
+    if (searchstring) {
+      conditions.searchstring = { $regex: searchstring.toLowerCase() };
     }
 
     let allCargoDescriptions = [];
