@@ -130,9 +130,12 @@ async function getListCargoTypes(req, res, next) {
 
 function isEmptyObject(obj) {
   console.log(obj);
-  console.log(Object.keys(obj).length);
-  console.log(!Object.keys(obj).length);
-  return !Object.keys(obj).length;
+  for (var prop in obj) {
+    console.log(prop);
+    if (obj.hasOwnProperty(prop)) return false;
+  }
+
+  return true;
 }
 
 module.exports = router;
