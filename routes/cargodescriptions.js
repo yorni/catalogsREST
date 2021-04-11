@@ -78,11 +78,11 @@ async function getListCargoDescriptions(req, res, next) {
 
     let allCargoDescriptions = [];
     if (limit) {
-      allCargoDescriptions = await deliveryCondition
+      allCargoDescriptions = await cargoDescription
         .find(conditions)
         .limit(+limit);
     } else {
-      allCargoDescriptions = await deliveryCondition.find(conditions);
+      allCargoDescriptions = await cargoDescription.find(conditions);
     }
     const allCargoDescriptionsLang = allCargoDescriptions.map(
       (addServiceItem) => {
