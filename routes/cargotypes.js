@@ -115,7 +115,7 @@ async function getListCargoTypes(req, res, next) {
         description: addServiceItem.description[language],
         type: addServiceItem.type[language],
         typeref: addServiceItem.typeref,
-        limits: addServiceItem.limits,
+        limits: limits,
       };
     });
     res.result = {
