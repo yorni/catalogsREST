@@ -16,6 +16,21 @@ const additionalServiceSchema = new Schema({
     },
   },
 
+  additionalSize: {
+    width: {
+      type: String,
+      required: false,
+    },
+    height: {
+      type: String,
+      required: false,
+    },
+    length: {
+      type: String,
+      required: false,
+    },
+  },
+
   categoryGroup: {
     UK: {
       type: String,

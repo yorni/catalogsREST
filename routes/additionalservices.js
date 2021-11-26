@@ -22,6 +22,7 @@ router.post("/", checkApiKey, async (req, res) => {
     let addService = await additionalService.findOne({ ref: req.body.ref });
     if (addService) {
       addService.description = req.body.description;
+      addService.additionalSize = req.body.additionalSize;
       addService.ref = req.body.ref;
       addService.sender = req.body.sender;
       addService.recipient = req.body.recipient;
@@ -35,6 +36,7 @@ router.post("/", checkApiKey, async (req, res) => {
     } else {
       addService = new additionalService({
         description: req.body.description,
+        additionalSize: req.body.additionalSize,
         ref: req.body.ref,
         sender: req.body.sender,
         recipient: req.body.recipient,
@@ -119,6 +121,7 @@ async function getListAdditionalServices(req, res, next) {
         return {
           ref: addServiceItem.ref,
           description: addServiceItem.description[language],
+          additionalSize: addServiceItem.additionalSize,
           sender: addServiceItem.sender,
           recipient: addServiceItem.recipient,
           serviceGroup: addServiceItem.serviceGroup[language],
